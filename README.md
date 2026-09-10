@@ -2,7 +2,7 @@
 
 Turns a deep-research report into three files: results a human reviews and later agents trust; findings grouped under each result's key; the original, untouched.
 
-The results file is the review surface. A result is a paragraph under a heading like `## [gate-reduces-not-prevents] The gate reduces blast radius; it does not prevent`. You accept, edit, or delete it and merge. Sources, spans, and the derivation live in findings under the same key, one hop away, opened only when someone asks how a result was reached.
+The results file is the review surface: `## <topic>` headers, one bullet per result under each, a key like `[gate-reduces-not-prevents]` closing the bullet. You accept, edit, or delete bullets and merge. Sources, spans, and the derivation live in findings under the same key, one hop away, opened only when someone asks how a result was reached.
 
 Four passes: extract results (starting from the report's own TL;DR / Key Findings), merge and key them, group the evidence under each key, then a fresh-context check that keeps only what is verified and on-topic.
 

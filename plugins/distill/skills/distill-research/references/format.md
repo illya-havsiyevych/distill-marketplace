@@ -12,22 +12,22 @@ Three files per research topic. `STEM` = `research/YYYY-MM-DD-<slug>`.
 
 ```markdown
 # <Title as a scope>
-<!-- YYYY-MM-DD -->
 
-<Scope paragraph. What this covers, in the source's own summary if it has one. No key.>
+<Scope paragraph. What this covers, in the source's own summary if it has one.>
 
-## [convergent-architecture] A named, converging architecture
-<One paragraph, 1–6 sentences, the argument intact. This is the result.
-A human accepts or rejects it whole.>
+## fireconnect
+- fireconnect is a vendor-specific config CLI, not a gateway or SDK. It rewrites each agent's own settings so the agent talks directly to Fireworks — `ANTHROPIC_BASE_URL` and model slots in Claude Code's `settings.json`, a provider block in `~/.codex/config.toml`, and so on. [fireconnect-writes-agent-config]
+- It has no runtime component and its edits are reversible. `on` rewrites the tool's config; `off` restores the original byte for byte. [no-proxy-no-overhead]
 
-## [scoped-token-inside-sandbox] Commercial platforms mostly keep a scoped token inside the sandbox
-<paragraph>
+## The category
+- The category exists because agents read config and providers ship compatible endpoints. A wrapper only has to connect the two. [compat-endpoints-enable-category]
 ```
 
-- One `##` block per result. The heading carries the mnemonic key and a short title. The body is one paragraph.
-- The key names the result — `[what-it-says]`, lowercase, hyphens, 2–4 tokens. Not the source. `[gate-reduces-not-prevents]`, `[pr-prep-is-offline]`, `[no-text-c2pa]`.
-- Nothing else in this file. No sources, dates, confidence, verdicts, questions, or sentences about the source or the audit. The file is the knowledge, not a review of it. Test: delete the source; this file must still read as a standalone statement of what is known.
-- Negative results are results: `## [no-text-c2pa] No C2PA profile for prose exists` with a paragraph saying what was looked for and where.
+- `## <topic>` headers group results by subject. Topics follow the source's structure when it has one; otherwise the merge pass groups related results. Three to six topics is typical.
+- One bullet per result. The first sentence states the result; the rest support it — 1–6 sentences, argument intact. A human accepts or rejects the bullet whole.
+- The mnemonic key closes the bullet: `[what-it-says]`, lowercase, hyphens, 2–4 tokens. It names the result, never the source.
+- No date comment — the date is in the file name. No sources, confidence, verdicts, questions, or sentences about the source or the audit. The file is the knowledge, not a review of it. Test: delete the source; this file must still read as a standalone statement of what is known.
+- Negative results are bullets like any other: `- No C2PA profile for prose exists; searched the C2PA spec index and vendor docs through 2026-09. [no-text-c2pa]`
 
 ## Findings file
 
@@ -59,7 +59,7 @@ sources:
 verify: dropped — single secondary source; the same file's own finding is "almost no shipping platform implements the pure form"
 ```
 
-- One `## [key]` section per result, same keys as the results file, same order. Dropped results keep their section so the drop is auditable.
+- One `## [key]` section per result, same keys as the results file, in results-file order. Dropped results keep their section so the drop is auditable.
 - `from:` points into `--reasoning.md` by section, so the derivation is one hop away.
 - `merged:` lists the phrasings folded into this result, so nothing silently vanished.
 - `sources:` one line each: who, what, when, url; a verbatim span on the next line when one exists. A source can be `executed <date>: <command> → <observed>`, `searched <date>: <where> → not found`, or `human-review <date>` for something the human asserted.

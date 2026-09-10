@@ -16,11 +16,11 @@ Copy `$0` byte for byte to `STEM--reasoning.md`, one line prepended: `<!-- sourc
 ## Pass 1 — extract results
 Pull results out of the report. Start from its summary and findings sections — TL;DR, Key Findings, Executive Summary, numbered findings — because those are already results; then walk the rest for results the summary skipped. A result is a claim about the subject, 1–6 sentences, argument intact. Not a result: recommendations, caveats, methodology, self-assessment, anything about the report rather than the subject.
 
-## Pass 2 — merge and key
-Merge duplicates and rephrasings into one result each; keep the strongest phrasing, remember the others. Give each result a mnemonic key naming what it says: `[what-it-says]`, lowercase, hyphens, 2–4 tokens. Keys name results, never sources.
+## Pass 2 — merge, key, group
+Merge duplicates and rephrasings into one result each; keep the strongest phrasing, remember the others. Give each result a mnemonic key naming what it says: `[what-it-says]`, lowercase, hyphens, 2–4 tokens. Keys name results, never sources. Then group results under three to six topic headers, following the source's structure when it has one.
 
 ## Pass 3 — group findings
-For each key, gather from `--reasoning.md` everything that supports it: the section it came from, the sources with a verbatim span where one exists, the phrasings you merged. Write `STEM--findings.md` per the format, one `## [key]` section per result, no `verify:` lines yet. Write `STEM.md` per the format: title, scope paragraph, one `## [key] Title` block per result.
+For each key, gather from `--reasoning.md` everything that supports it: the section it came from, the sources with a verbatim span where one exists, the phrasings you merged. Write `STEM--findings.md` per the format, one `## [key]` section per result, no `verify:` lines yet. Write `STEM.md` per the format: title, scope paragraph, then `## <topic>` headers with one bullet per result under each, the key closing every bullet. No date comment.
 
 Do not evaluate, grade, or comment on the report anywhere in `STEM.md`.
 

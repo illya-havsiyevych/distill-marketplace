@@ -1,5 +1,5 @@
 {
   "name": "distill",
   "description": "Distill a deep-research report into results a human reviews and later agents trust, with evidence and the original one hop away.",
-  "version": "0.5.0"
+  "version": "0.5.1"
 }
