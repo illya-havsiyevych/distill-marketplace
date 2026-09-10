@@ -36,7 +36,7 @@ One `## [key]` section per distinct source. `source` first, always. Sections are
 
 Never numeric. Two branches allocating `[S-15]` collide; two branches allocating `[exa-repo]` refer to the same thing, which is correct.
 
-Reserved: `[absent]` for negative findings, `[human-review]` for human decisions.
+Reserved: `[absent]` for negative findings, `[human-review]` for human decisions, `[executed]` for sentences verified by running a command in-session.
 
 ## Objects
 
@@ -90,6 +90,16 @@ Feeds distill-improve, not the report.
 ```
 note: <dead end, dropped sentence, doubt, or why something was cut>
 ```
+
+### executed
+
+```
+executed: <the command or check that was run>
+observed: <what it showed, one line>
+as_of:    YYYY-MM-DD
+```
+
+Lives under `## [executed]`. A source-less verification is only as durable as the environment it ran in, so `as_of` is mandatory.
 
 ### review (humans only)
 

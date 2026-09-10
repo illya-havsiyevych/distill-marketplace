@@ -1,5 +1,5 @@
 {
   "name": "distill",
   "description": "Distill raw deep-research output into a terse reviewable report, typed findings, and an untouched reasoning original. Stages run in forked contexts.",
-  "version": "0.4.0"
+  "version": "0.4.1"
 }

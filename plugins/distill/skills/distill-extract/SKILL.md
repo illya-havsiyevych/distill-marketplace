@@ -20,8 +20,8 @@ factual statement → `claim` (record the section it came from as `block`) · ci
 **Pass 2 — merge and key.** Merge duplicate claims. Merge sources that resolve to the same document. Give each source a mnemonic key `[<who>-<what>]`, at most three tokens, lowercase, self-describing, never numeric. Reserved: `[human-review]`, `[absent]`.
 
 **Pass 3 — group.** Write `STEM--findings.md`: one `## [key]` section per key, `source` object first, then its claims, memories, notes; negatives under `## [absent]`.
-Write `STEM--draft.md` as blocks: title, one unkeyed scope paragraph, then one `##` block per source section (or per coherent topic if the source is unstructured). Each block is one paragraph of 1–6 sentences in the source's logical order with its connectives intact, followed by a key line holding the union of that paragraph's sentence keys. Negatives become a final `## Searched, absent` block keyed `[absent]`.
+Write `STEM--draft.md` as blocks. The source's summary (TL;DR, abstract, executive summary) becomes the unkeyed scope paragraph. The source's findings sections — key findings, numbered findings, headed sections — become the `##` blocks, in the source's order, one per finding. The source's recommendations, caveats, methodology, and self-assessment do not become blocks; route anything worth keeping to `note:` objects. Each block is one paragraph of 1–6 sentences in the source's logical order with its connectives intact, followed by a key line holding the union of that paragraph's sentence keys. Negatives become a final `## Searched, absent` block keyed `[absent]`.
 
-Do not verify. Do not start the next stage.
+Do not verify. Do not evaluate, grade, or comment on the source anywhere in the draft — the draft is the knowledge, not a review of it. Do not start the next stage.
 
 Return exactly one line: `extract: <n> blocks, <n> sentences, <n> sources, <n> negatives, <n> notes`.

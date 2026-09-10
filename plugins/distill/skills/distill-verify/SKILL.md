@@ -26,7 +26,7 @@ If more than one findings file is given: a key that appears in several files wit
 
 Block verdict: keep if every sentence kept; tighten if any sentence was tightened or dropped (rewrite the paragraph so it still reads whole, connectives intact); cut if no sentence survives. Rebuild the block's key line as the union of surviving sentence keys.
 
-Write `STEM.md` per the report template. Delete `STEM--draft.md` only if it was the default draft.
+Write `STEM.md` per the report template — the file name is exactly `STEM.md`, no suffix. The report contains only subject-matter sentences; nothing about the audit, grades, volatility, or what the reader should check. That material goes to the queue or findings. Delete `STEM--draft.md` only if it was the default draft.
 Write `research/review-queue.md`: at most nine items, each naming a block and the sentence in question, ordered by what hurts most if wrong — vendor-reported figures, disputed values, single-source sentences on material points, anything you tightened.
 
 Self-check: if at any point you recall writing a sentence of this draft, stop and return `ISOLATION FAILED`. Do not continue.

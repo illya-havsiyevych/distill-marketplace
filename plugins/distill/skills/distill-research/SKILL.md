@@ -12,7 +12,7 @@ Umbrella. Runs in the main conversation. The two stages run forked where the har
 |---|---|---|---|
 | intake | this skill | main | `STEM--reasoning.md` |
 | extract | `distill-extract` | fork | `STEM--findings.md`, `STEM--draft.md` |
-| verify | `distill-verify` | fork | `STEM.md`, `research/review-queue.md`; deletes draft |
+| verify | `distill-verify` | fork | `STEM.md` (no suffix — this is the report), `research/review-queue.md`; deletes draft |
 
 ## Canary — before anything else
 
