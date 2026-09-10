@@ -1,6 +1,8 @@
 # distill
 
-Turns one raw deep-research output into three files: a terse report agents load by default, typed findings under mnemonic source keys, and the untouched reasoning original.
+Turns one raw deep-research output into three files: a report of human-reviewable logical blocks that agents load by default, typed findings under mnemonic source keys, and the untouched reasoning original.
+
+Block = review unit, sentence = verification unit. You accept or reject a paragraph; the skill checks every sentence in it against a source span and records the binding in findings.
 
 ## Install
 
@@ -21,4 +23,12 @@ Invoke in natural language ("distill research/foo.md"), not with a slash — Cow
 
 ## Input
 
-Feed it raw research with sources. An already-synthesized playbook with no citations produces an empty findings file — that is the skill refusing, correctly.
+Feed it raw research with sources. The umbrella refuses input with no citations — an already-synthesized playbook would produce an empty findings file.
+
+To check such a playbook instead, distill the reports it was built from, then:
+
+```
+distill-verify research/2026-09-10-playbook path/to/playbook.md research/<a>--findings.md research/<b>--findings.md
+```
+
+Every playbook line with no supporting key is cut and logged. That is the answer to whether it holds up.

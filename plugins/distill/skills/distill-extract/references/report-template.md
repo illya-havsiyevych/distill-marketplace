@@ -1,38 +1,47 @@
 # Report template
 
-`research/YYYY-MM-DD-<slug>.md`. The only research file agents load by default. Humans review it as a PR diff.
+`research/YYYY-MM-DD-<slug>.md`. The only research file agents load by default. Humans review it block by block, as a PR diff.
 
 ```markdown
-# <Title as a question or a scope>
+# <Title as a scope>
 <!-- YYYY-MM-DD -->
 
-## <Topic group>
-- <one atomic claim> [key]
-- <one atomic claim> [key] [key]
+<One scope paragraph. What this covers. No keys.>
+
+## <Logical block>
+<One paragraph, 1–6 sentences, in the source's own logical order, connectives
+intact. Dense, confident, self-contained: a reader accepts or rejects it whole.>
+[key] [key] [key]
+
+## <Logical block>
+...
 
 ## Searched, absent
-- <what does not exist> [absent]
+<One paragraph naming what does not exist and where it was looked for.>
+[absent]
 ```
 
-## Rules
+## The rule
 
-- One claim per line. If a line has "and," it is probably two claims.
-- Every line ends with at least one key. `[absent]` counts.
-- Keys only — no URLs, dates, confidence words, or reviewer names. Those live in findings, git, or nowhere.
-- Group by topic, not by source and not by confidence. Agents read this by subject.
-- Negative findings always get their own final section. They are the most expensive results to re-derive and the easiest to lose.
-- Title is the scope. Verify cuts any line that does not serve it.
-- No length cap. This is a store, not a checklist. The checklist is `review-queue.md`, capped at nine.
+**Block = review unit. Sentence = verification unit.**
 
-## A field earns a line only if
+- A block is a `##` heading, one paragraph, and a trailing key line. Nothing else.
+- The paragraph keeps the argument's shape — "so", "therefore", "but" — because that shape is what a human is accepting. Splitting it into bullets loses the inference and hides misleading order behind individually-true facts.
+- Every sentence is verified on its own against findings. The sentence→key binding is recorded in findings, not here. The key line shows the union.
+- An unsupported sentence is removed from the paragraph and logged in findings. If that empties the block, the block is cut.
+- Blocks follow the source's sections when the source has them; otherwise one block per coherent topic. A block should make sense cut out and read alone.
+- Keys only on the key line — no URLs, dates, confidence words, or reviewer names in the paragraph.
+- No length cap on the report. The checklist is `review-queue.md`, capped at nine; each item names a block and the sentence in question.
 
-it varies per claim **and** is needed at read time. Everything else is constant, derivable from git, or consumed once in review.
+## A field earns a place only if
+
+it varies per block **and** is needed at read time. Everything else is constant, derivable from git, or consumed once in review.
 
 | Dropped | Lives in |
 |---|---|
 | status / verified | merge to main |
 | reviewer, date | `git blame` |
-| confidence | which file the claim is in |
+| confidence | which file the block is in |
 | falsifier | PR description |
 | recheck | human's call, not a field |
-| url, span | findings under the key |
+| url, span, sentence→key | findings under the key |

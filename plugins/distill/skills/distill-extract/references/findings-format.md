@@ -60,11 +60,12 @@ archive:   <snapshot url>                                   (optional)
 ### claim
 
 ```
-claim:   <one atomic statement, as it appears in the report>
+claim:   <one sentence, as it appears in the report>
+block:   <the ## heading of the block it belongs to>
 verdict: supported | partial | contradicted | unverifiable
 ```
 
-`partial` means the span supports a weaker version — verify tightens the report line to match. `contradicted` and `unverifiable` never reach the report; they go to `review-queue.md`.
+This is the sentence→key binding the report does not show. `partial` means the span supports a weaker version — verify tightens the sentence. `contradicted` and `unverifiable` never reach the report; they go to `review-queue.md`.
 
 ### negative
 
@@ -87,7 +88,7 @@ Feeds distill-improve, not the report.
 ### note
 
 ```
-note: <dead end, dropped item, doubt, or why something was cut>
+note: <dead end, dropped sentence, doubt, or why something was cut>
 ```
 
 ### review (humans only)
@@ -95,9 +96,9 @@ note: <dead end, dropped item, doubt, or why something was cut>
 ```
 reviewed: YYYY-MM-DD
 decisions:
-  - <what changed and the one-line reason>
+- <what changed and the one-line reason>
 ```
 
 ## What is not here
 
-No per-claim confidence, reviewer, status, or recheck date. Confidence is where a claim sits — report, queue, or cut. Reviewer and date are in git. Recheck is a human decision, not a field the agent guesses.
+No per-claim confidence, reviewer, status, or recheck date. Confidence is where a block sits — report, queue, or cut. Reviewer and date are in git. Recheck is a human decision, not a field the agent guesses.

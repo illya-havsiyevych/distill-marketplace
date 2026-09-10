@@ -1,1 +1,23 @@
-{"$schema":"https://anthropic.com/claude-code/marketplace.schema.json","name":"distill-marketplace","owner":{"name":"illya-havsiyevych","url":"https://github.com/illya-havsiyevych"},"metadata":{"description":"Distill raw deep-research output into reviewable, reusable knowledge.","version":"0.3.0","pluginRoot":"./plugins"},"plugins":[{"name":"distill","source":"./plugins/distill","description":"Terse report + typed findings + untouched reasoning, with forked verify stage.","version":"0.3.0","author":{"name":"illya-havsiyevych"},"license":"MIT"}]}
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "distill-marketplace",
+  "owner": {
+    "name": "illya-havsiyevych",
+    "url": "https://github.com/illya-havsiyevych"
+  },
+  "metadata": {
+    "description": "Distill raw deep-research output into reviewable, reusable knowledge.",
+    "version": "0.4.0",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "distill",
+      "source": "./plugins/distill",
+      "description": "Terse report + typed findings + untouched reasoning, with forked verify stage.",
+      "version": "0.4.0",
+      "author": { "name": "illya-havsiyevych" },
+      "license": "MIT"
+    }
+  ]
+}
