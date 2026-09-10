@@ -1,73 +1,33 @@
 ---
 name: distill-research
-description: Distill a raw deep-research output into three files — a report of human-reviewable logical blocks that agents load by default, a findings file of typed evidence under mnemonic keys, and the untouched reasoning original. Use when the user has a deep-research report with sources and wants it turned into reviewable, reusable knowledge, or wants an existing document verified line by line against findings from one or more distilled reports. Orchestrates distill-extract and distill-verify.
-argument-hint: <path-to-raw-research.md>
+description: Distill a deep-research report into results a human reviews and later agents trust, with evidence and the original kept one hop away. Use when the user has a research report and wants it turned into reviewable, reusable knowledge. Runs passes 1–3; hands pass 4 to distill-verify in a fresh context.
+argument-hint: <path-to-report.md>
 ---
 
 # distill-research
 
-Umbrella. Runs in the main conversation. The two stages run forked where the harness supports it, so neither sees this conversation or each other.
+Read `references/format.md` first. It defines the three files.
 
-| Stage | Skill | Context | Writes |
-|---|---|---|---|
-| intake | this skill | main | `STEM--reasoning.md` |
-| extract | `distill-extract` | fork | `STEM--findings.md`, `STEM--draft.md` |
-| verify | `distill-verify` | fork | `STEM.md` (no suffix — this is the report), `research/review-queue.md`; deletes draft |
+`STEM` = `research/YYYY-MM-DD-<slug>` — today's date, slug lowercase, hyphens, at most six words from the title. Print `STEM` as your first line.
 
-## Canary — before anything else
+## Pass 0 — keep the original
+Copy `$0` byte for byte to `STEM--reasoning.md`, one line prepended: `<!-- source: <tool> · <date> -->`.
 
-Your first line of output, before any tool call: `STEM = research/YYYY-MM-DD-<slug>` with the real date and slug, then the three paths it implies. If you cannot produce that line from this file, the skill did not load and you are improvising. Stop and say so.
+## Pass 1 — extract results
+Pull results out of the report. Start from its summary and findings sections — TL;DR, Key Findings, Executive Summary, numbered findings — because those are already results; then walk the rest for results the summary skipped. A result is a claim about the subject, 1–6 sentences, argument intact. Not a result: recommendations, caveats, methodology, self-assessment, anything about the report rather than the subject.
 
-## Run
+## Pass 2 — merge and key
+Merge duplicates and rephrasings into one result each; keep the strongest phrasing, remember the others. Give each result a mnemonic key naming what it says: `[what-it-says]`, lowercase, hyphens, 2–4 tokens. Keys name results, never sources.
 
-0. **Source check.** Open nothing, but confirm the input file contains citations — URLs, DOIs, `[n]` refs, or a references section. If it has none, it is already a synthesis: if `research/*--findings.md` files exist for its topic, route it to *Verify an existing document* below instead of extract; if none exist, stop and ask the user for the raw research it was built from.
-1. **Intake.** Copy `$0` verbatim to `research/YYYY-MM-DD-<slug>--reasoning.md`. Prepend one line: `<!-- source: <tool> · <date> -->`. Slug: lowercase, hyphens, at most eight words from the title. Let `STEM` = `research/YYYY-MM-DD-<slug>`.
-2. Invoke `distill-extract` with `STEM`. Wait for its result.
-3. Invoke `distill-verify` with `STEM`. Wait for its result.
-4. Tell the user: report line count, queue size, both stage results verbatim, and whether isolation was achieved (see below).
+## Pass 3 — group findings
+For each key, gather from `--reasoning.md` everything that supports it: the section it came from, the sources with a verbatim span where one exists, the phrasings you merged. Write `STEM--findings.md` per the format, one `## [key]` section per result, no `verify:` lines yet. Write `STEM.md` per the format: title, scope paragraph, one `## [key] Title` block per result.
 
-Open no research file yourself beyond step 0. Paths only.
+Do not evaluate, grade, or comment on the report anywhere in `STEM.md`.
 
-## Verify an existing document
+## Pass 4 — hand off
+Invoke `distill-verify` with `STEM`. It runs in a fresh context so it does not remember writing the draft. If this harness cannot start a fresh context, say so and tell the user to run `distill-verify STEM` in a new chat.
 
-To check a synthesized document — a playbook, a summary, someone else's report — against findings you already have:
+When it returns, report: the three paths, the results kept, and the titles of any dropped — one line each.
 
-```
-distill-verify STEM <path-to-document> <findings-1> [<findings-2> ...]
-```
-
-Verify treats the document as the draft and the listed findings as its evidence. It writes `STEM.md` and does not delete the document. Lines with no supporting key across any findings file are cut and logged — that is the answer to "does this playbook hold up."
-
-## If isolation was not achieved
-
-Three cases, in order of likelihood:
-
-- **Harness has no subagents** (Cowork, claude.ai, Codex without `exec`): the stages run inline and verify will remember extract. Run them anyway, then tell the user plainly: *isolation not achieved — for a fresh-look verify, run `distill-verify STEM` in a new chat.* That standalone run is real isolation.
-- **Fork not honored** (some Claude Code versions — anthropics/claude-code #17283, #49559): a stage's working output appears in this conversation instead of a single result line. Stop. Re-run with the Task tool, `subagent_type: general-purpose`, prompt `Run the distill-verify skill on STEM`.
-- **Slash invocation stalls** (Cowork): invoke the stages in natural language instead of `/distill-extract`.
-
-## Read rules — copy these to AGENTS.md or CLAUDE.md
-
-They apply to every agent in the repo, not only this skill.
-
-- Default research context is `research/*.md` **excluding** `*--reasoning.md`, `*--findings.md`, `*--draft.md`.
-- A result line outranks search results, your own reasoning, and findings. Do not re-research it.
-- Never edit `--reasoning.md`. Never write under `## [human-review]`.
-- New evidence contradicts a result line → append to `research/review-queue.md`. Do not edit the line.
-
-## After human review
-
-The human edits the report directly and merges. Sign-off is a source. Record it in findings:
-
-```
-## [human-review]
-reviewed: YYYY-MM-DD
-decisions:
-- <what changed and the one-line reason>
-```
-
-A line the human asserted without another source cites `[human-review]`.
-
-## Improving the stages
-
-`distill-improve` is the only skill that reads `--findings.md` outside this flow. Run it periodically. It proposes rule changes and never applies them.
+## After the human reviews
+The human edits `STEM.md` and merges; that is the sign-off. A result the human adds or changes gets a findings section with `sources: - human-review <date>`.

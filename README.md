@@ -1,34 +1,19 @@
 # distill
 
-Turns one raw deep-research output into three files: a report of human-reviewable logical blocks that agents load by default, typed findings under mnemonic source keys, and the untouched reasoning original.
+Turns a deep-research report into three files: results a human reviews and later agents trust; findings grouped under each result's key; the original, untouched.
 
-Block = review unit, sentence = verification unit. You accept or reject a paragraph; the skill checks every sentence in it against a source span and records the binding in findings.
+The results file is the review surface. A result is a paragraph under a heading like `## [gate-reduces-not-prevents] The gate reduces blast radius; it does not prevent`. You accept, edit, or delete it and merge. Sources, spans, and the derivation live in findings under the same key, one hop away, opened only when someone asks how a result was reached.
+
+Four passes: extract results (starting from the report's own TL;DR / Key Findings), merge and key them, group the evidence under each key, then a fresh-context check that keeps only what is verified and on-topic.
 
 ## Install
 
-**Claude Code**
-```
-/plugin marketplace add <your-github-user>/distill-marketplace
-/plugin install distill@distill-marketplace
-/reload-plugins
-```
+Claude Code: `/plugin marketplace add illya-havsiyevych/distill-marketplace` then `/plugin install distill@distill-marketplace`.
 
-**Cowork (Claude Desktop):** Customize → Personal plugins → + → Add marketplace → paste the repo URL → Sync → install `distill`.
+Cowork: Customize → Personal plugins → Add marketplace → this repo → install. Cowork sometimes registers a plugin skill's name without mounting its file; if the first line of output is not `STEM = research/…`, connect this folder to the session and point the agent at `plugins/distill/skills/distill-research/SKILL.md` directly.
 
-Invoke in natural language ("distill research/foo.md"), not with a slash — Cowork's slash path for plugin skills is unreliable.
+## Use
 
-## Isolation
+Say *distill `<report.md>`* in natural language. The verify pass is forked in Claude Code; elsewhere it runs inline, and a fresh-look verify is `distill-verify research/<stem>` in a new chat.
 
-`distill-extract` and `distill-verify` are forked (`context: fork`). That works in Claude Code. Cowork and claude.ai have no subagent mechanism, so there the stages run inline and verify can remember extract. For real isolation there, run extract in one chat and verify in a fresh one.
-
-## Input
-
-Feed it raw research with sources. The umbrella refuses input with no citations — an already-synthesized playbook would produce an empty findings file.
-
-To check such a playbook instead, distill the reports it was built from, then:
-
-```
-distill-verify research/2026-09-10-playbook path/to/playbook.md research/<a>--findings.md research/<b>--findings.md
-```
-
-Every playbook line with no supporting key is cut and logged. That is the answer to whether it holds up.
+Copy the four lines under "Everyone else" in `references/format.md` into your CLAUDE.md so other skills treat results as settled.
