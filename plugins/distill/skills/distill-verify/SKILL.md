@@ -17,9 +17,9 @@ For each bullet in `STEM.md` — its key closes it — read that key's section i
 
 - **kept** — the sources, with their spans, support the bullet as written, and the result serves the title.
 - **tightened — <how>** — the sources support a weaker or narrower version. Rewrite the bullet to what they support; keep it whole, argument intact, key at the end.
-- **dropped — <why>** — no source supports it, it contradicts a better-supported result in the same file, or it is about the report rather than the subject. Remove the bullet from `STEM.md`; remove the topic header too if it is left empty. Keep the findings section.
+- **dropped — <why>** — nothing supports it, it contradicts a better-supported result in the same file, or it is about the source rather than the subject. Remove the bullet; remove its topic header too if that leaves it empty. Keep the findings section.
 
-Never add a result. Never add a sentence the findings do not support. A result resting on one secondary source is kept only if nothing better-supported in the file contradicts it.
+Never add a result. Never add a sentence the findings do not support. A result whose only source is the original itself, or one secondary source, is kept only if nothing better-supported in the file contradicts it.
 
 Write the `verify:` line in every findings section. Rewrite `STEM.md` with the kept and tightened bullets, same topics, same order.
 

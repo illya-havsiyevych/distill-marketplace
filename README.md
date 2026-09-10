@@ -1,10 +1,10 @@
 # distill
 
-Turns a deep-research report into three files: results a human reviews and later agents trust; findings grouped under each result's key; the original, untouched.
+Turns a research source — a report, a paper, notes, a transcript — into three files: results a human reviews and later agents trust; findings grouped under each result's key; the original, untouched.
 
-The results file is the review surface: `## <topic>` headers, one bullet per result under each, a key like `[gate-reduces-not-prevents]` closing the bullet. You accept, edit, or delete bullets and merge. Sources, spans, and the derivation live in findings under the same key, one hop away, opened only when someone asks how a result was reached.
+The results file is the review surface: `## <topic>` headers, one bullet per result, a key like `[what-it-says]` closing each bullet. You accept, edit, or delete bullets and merge. Sources, spans, and the derivation live in findings under the same key, one hop away, opened only when someone asks how a result was reached.
 
-Four passes: extract results (starting from the report's own TL;DR / Key Findings), merge and key them, group the evidence under each key, then a fresh-context check that keeps only what is verified and on-topic.
+Four passes: extract results, merge and key them, group the evidence under each key, then a fresh-context check that keeps only what is verified and on-topic.
 
 ## Install
 
@@ -14,6 +14,6 @@ Cowork: Customize → Personal plugins → Add marketplace → this repo → ins
 
 ## Use
 
-Say *distill `<report.md>`* in natural language. The verify pass is forked in Claude Code; elsewhere it runs inline, and a fresh-look verify is `distill-verify research/<stem>` in a new chat.
+Say *distill `<source.md>`* in natural language. The verify pass is forked in Claude Code; elsewhere it runs inline, and a fresh-look verify is `distill-verify research/<stem>` in a new chat.
 
 Copy the four lines under "Everyone else" in `references/format.md` into your CLAUDE.md so other skills treat results as settled.
