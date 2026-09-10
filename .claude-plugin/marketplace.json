@@ -1,0 +1,11 @@
+{
+  "name": "distill-marketplace",
+  "description": "Distill raw deep-research output into reviewable, reusable knowledge.",
+  "plugins": [
+    {
+      "name": "distill",
+      "source": "./plugins/distill",
+      "description": "Terse report + typed findings + untouched reasoning, with forked verify stage."
+    }
+  ]
+}
