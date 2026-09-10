@@ -11,7 +11,7 @@ Read `references/format.md` first. It defines the three files.
 `STEM` = `research/YYYY-MM-DD-<slug>` — today's date; slug short, lowercase, hyphens, from the title. State `STEM` before anything else.
 
 ## Pass 0 — keep the original
-Copy `$0` byte for byte to `STEM--reasoning.md`, one line prepended: `<!-- source: <origin> · <date> -->`.
+`cp "$0" STEM--reasoning.md`. A shell copy, not a read and a write. Nothing prepended.
 
 ## Pass 1 — extract results
 Walk the whole source. A result is a claim about the subject, with the argument that carries it. If the source has a summary of its own, it is a good first pass, not the boundary. Not a result: advice to the reader, and anything about the source itself rather than its subject.
@@ -20,7 +20,7 @@ Walk the whole source. A result is a claim about the subject, with the argument 
 Merge duplicates and rephrasings into one result each; keep the strongest phrasing, remember the others. Give each result a mnemonic key naming what it says: `[what-it-says]`, lowercase, hyphens, a few words. Keys name results, never sources. Group results under topic headers, following the source's structure when it has one.
 
 ## Pass 3 — group findings
-For each key, gather from `--reasoning.md` everything that supports it: the section it came from, the sources with a verbatim span where one exists, the phrasings you merged. When the source cites nothing for a result, the source itself is listed as the source. Write `STEM--findings.md` per the format, no `verify:` lines yet. Write `STEM.md` per the format.
+For each key, record where in the original it came from (`from: §…`), which sections were merged into it, and every external source the original cites for it with the verbatim span. Point at the original; do not quote it. Write `STEM--findings.md` per the format, no `verify:` lines yet. Write `STEM.md` per the format.
 
 Do not evaluate, grade, or comment on the source anywhere in `STEM.md`.
 

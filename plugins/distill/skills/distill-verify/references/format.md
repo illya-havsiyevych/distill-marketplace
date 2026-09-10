@@ -33,30 +33,28 @@ Three files per topic. `STEM` = `research/YYYY-MM-DD-<slug>`.
 
 ```markdown
 # <title> — findings
-<!-- from: STEM--reasoning.md -->
 
 ## [what-it-says]
-from: --reasoning.md §<section>
-merged: "<phrasing folded into this result>"; "<another>"
+from: §<section>
+
+## [another-result]
+from: §<section>
+merged: §<section>, §<section>
 sources:
-- <who>, <what>, <when> — <url>
-  "<verbatim span, when one exists>"
-- the original, §<section>
+- <who>, <what>, <when> — "<verbatim span>"
 - executed <date>: <command> → <observed>
 - searched <date>: <where> → not found
-- human-review <date>
 verify: kept | tightened — <how> | dropped — <why>
 ```
 
 - One `## [key]` section per result, same keys as the results file, same order. Dropped results keep their section so the drop is auditable.
-- `from:` points into `--reasoning.md` by section, so the derivation is one hop away.
-- `merged:` lists the phrasings folded into this result, so nothing silently vanished. Omit when nothing was merged.
-- `sources:` one per line. When the original cites nothing for a result, the original itself is the source: `- the original, §<section>`. That is honest and lets verify treat it as single-source.
+- `from:` is a short pointer into the original — a section number or heading. Nothing is copied from the original; it is one hop away.
+- `merged:` lists the sections whose phrasings were folded into this result, so nothing silently vanished. Omit when nothing was merged.
+- `sources:` lists external sources only, one per line, with the verbatim span that supports the result. Mandatory when the original cites one; the original is the only place it would otherwise live. Omit the line when the original cites nothing — `from:` already says the original asserts it.
 - `verify:` written only by the verify stage.
-
 ## Reasoning file
 
-The original. One line prepended: `<!-- source: <origin> · <date> -->`. Never edited.
+The original, copied with `cp`. Nothing prepended. Never edited.
 
 ## Everyone else — copy to CLAUDE.md
 
