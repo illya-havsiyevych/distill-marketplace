@@ -21,6 +21,6 @@ For each bullet in `STEM.md` — its key closes it — read that key's section i
 
 Never add a result. Never add a sentence the findings do not support.
 
-Write the `verify:` line in every findings section. Rewrite `STEM.md` with the kept and tightened bullets, same topics, same order.
+Write the `verify:` line in every findings section. Rewrite `STEM.md` with the kept and tightened bullets, same topics, same order. If `STEM.md` has a `## Summary` section, delete it and delete `## summary` from findings — the summary is downstream of the bullets and must be rebuilt by `distill-summarize`.
 
-Return one line: `verify: <n> kept, <n> tightened, <n> dropped` followed by the dropped titles.
+Return one line: `verify: <n> kept, <n> tightened, <n> dropped` followed by the dropped titles, and `summary removed` if one was.

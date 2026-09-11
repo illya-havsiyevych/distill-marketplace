@@ -1,6 +1,6 @@
 ---
 name: distill-research
-description: Distill a research source — a report, paper, notes, transcript — into results a human reviews and later agents trust, with evidence and the original kept one hop away. Use when the user has research and wants it turned into reviewable, reusable knowledge. Runs passes 1–3; hands pass 4 to distill-verify in a fresh context.
+description: Distill a research source — a report, paper, notes, transcript — into results a human reviews and later agents trust, with evidence and the original kept one hop away. Use when the user has research and wants it turned into reviewable, reusable knowledge. Runs passes 1–3; hands pass 4 to distill-verify and pass 5 to distill-summarize, each in a fresh context.
 argument-hint: <path-to-source.md>
 ---
 
@@ -24,10 +24,15 @@ For each key, record where in the original it came from (`from:`, in the origina
 
 Do not evaluate, grade, or comment on the source anywhere in `STEM.md`.
 
-## Pass 4 — hand off
-Invoke `distill-verify` with `STEM`. It runs in a fresh context so it does not remember writing the draft. If this harness cannot start a fresh context, say so and tell the user to run `distill-verify STEM` in a new chat.
+## Pass 4 — verify
+Invoke `distill-verify` with `STEM`. It runs in a fresh context so it does not remember writing the draft.
 
-When it returns, report: the three paths, the results kept, and the titles of any dropped — one line each.
+## Pass 5 — summarize
+When verify returns, invoke `distill-summarize` with `STEM`. It runs in a fresh context that can see only the results file, and adds a `## Summary` section — one TL;DR, one table, or one diagram — built from the results alone.
+
+If this harness cannot start a fresh context, say so and tell the user to run `distill-verify STEM` then `distill-summarize STEM` in new chats.
+
+When both return, report: the three paths, the results kept, the titles of any dropped, and which summary form was chosen — one line each.
 
 ## After the human reviews
 The human edits `STEM.md` and merges; that is the sign-off. A result the human adds or changes gets a findings section with `sources: - human-review <date>`.
