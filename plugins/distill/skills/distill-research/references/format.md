@@ -35,11 +35,11 @@ Three files per topic. `STEM` = `research/YYYY-MM-DD-<slug>`.
 # <title> — findings
 
 ## [what-it-says]
-from: §<section>
+from: <section>
 
 ## [another-result]
-from: §<section>
-merged: §<section>, §<section>
+from: <section>
+merged: <section>, <section>
 sources:
 - <who>, <what>, <when> — "<verbatim span>"
 - executed <date>: <command> → <observed>
@@ -48,7 +48,7 @@ verify: kept | tightened — <how> | dropped — <why>
 ```
 
 - One `## [key]` section per result, same keys as the results file, same order. Dropped results keep their section so the drop is auditable.
-- `from:` is a short pointer into the original — a section number or heading. Nothing is copied from the original; it is one hop away.
+- `from:` is a short pointer into the original, in whatever form the original uses — a section number, a heading, a page, a timestamp. Nothing is copied from the original; it is one hop away.
 - `merged:` lists the sections whose phrasings were folded into this result, so nothing silently vanished. Omit when nothing was merged.
 - `sources:` lists external sources only, one per line, with the verbatim span that supports the result. Mandatory when the original cites one; the original is the only place it would otherwise live. Omit the line when the original cites nothing — `from:` already says the original asserts it.
 - `verify:` written only by the verify stage.

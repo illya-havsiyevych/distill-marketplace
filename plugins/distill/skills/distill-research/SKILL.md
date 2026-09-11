@@ -20,7 +20,7 @@ Walk the whole source. A result is a claim about the subject, with the argument 
 Merge duplicates and rephrasings into one result each; keep the strongest phrasing, remember the others. Give each result a mnemonic key naming what it says: `[what-it-says]`, lowercase, hyphens, a few words. Keys name results, never sources. Group results under topic headers, following the source's structure when it has one.
 
 ## Pass 3 — group findings
-For each key, record where in the original it came from (`from: §…`), which sections were merged into it, and every external source the original cites for it with the verbatim span. Point at the original; do not quote it. Write `STEM--findings.md` per the format, no `verify:` lines yet. Write `STEM.md` per the format.
+For each key, record where in the original it came from (`from:`, in the original's own reference style), which sections were merged into it, and every external source the original cites for it with the verbatim span. Point at the original; do not quote it. Write `STEM--findings.md` per the format, no `verify:` lines yet. Write `STEM.md` per the format.
 
 Do not evaluate, grade, or comment on the source anywhere in `STEM.md`.
 
